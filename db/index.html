@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        <link rel="canonical" href="https://example.com/db/">
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>БД - Serega's Hospital</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css">
+
+        <script src="../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">Serega's Hospital</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href=".." class="nav-link">Главная</a>
+                            </li>
+                            <li class="navitem active">
+                                <a href="./" class="nav-link">БД</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../requests/" class="nav-link">Запросы</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../php/" class="nav-link">PHP</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../mongo/" class="nav-link">MongoDB</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href=".." class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../requests/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="2"><a href="#patients" class="nav-link">Patients</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#doctors" class="nav-link">Doctors</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#prices" class="nav-link">Prices</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#schedule" class="nav-link">Schedule</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#hospitals" class="nav-link">Hospitals</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#visists" class="nav-link">Visists</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#records" class="nav-link">Records</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h2 id="patients">Patients</h2>
+<table>
+<thead>
+<tr>
+<th>ПОЛЕ</th>
+<th>ТИП</th>
+<th>ПЕРВИЧНЫЙ КЛЮЧ</th>
+<th>ВНЕШНИЙ КЛЮЧ</th>
+<th>УНИКАЛЬНОСТЬ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>integer</td>
+<td>+</td>
+<td>-</td>
+<td>+</td>
+</tr>
+<tr>
+<td>name</td>
+<td>varchar(64)</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>birth</td>
+<td>varchar(64)</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>phone</td>
+<td>varchar(64)</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<p>Код создания:</p>
+<pre><code>create table patients (
+    id serial primary key,
+    name varchar(64) not null,
+    phone varchar(64) not null,
+    birth timestamp not null
+);
+</code></pre>
+<p>Код заполнения:</p>
+<pre><code>insert into patients (name, birth, phone) values('p1', now(), '+79112811575');
+insert into patients (name, birth, phone) values('p2', now(), '+79112811575');
+insert into patients (name, birth, phone) values('p3', now(), '+79112811575');
+</code></pre>
+<p><br></p>
+<h2 id="doctors">Doctors</h2>
+<table>
+<thead>
+<tr>
+<th>ПОЛЕ</th>
+<th>ТИП</th>
+<th>ПЕРВИЧНЫЙ КЛЮЧ</th>
+<th>ВНЕШНИЙ КЛЮЧ</th>
+<th>УНИКАЛЬНОСТЬ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>integer</td>
+<td>+</td>
+<td>-</td>
+<td>+</td>
+</tr>
+<tr>
+<td>name</td>
+<td>varchar(64)</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>birth</td>
+<td>varchar(64)</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>class</td>
+<td>varchar(64)</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>price_id</td>
+<td>integer</td>
+<td>-</td>
+<td>+</td>
+<td>-</td>
+</tr>
+<tr>
+<td>schedule_id</td>
+<td>integer</td>
+<td>-</td>
+<td>+</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<p>Код создания:</p>
+<pre><code>create table doctors (
+    id serial primary key,
+    name varchar(64) not null,
+    class varchar(64) not null,
+    price_id integer not null,
+    schedule_id integer not null,
+    birth timestamp not null,
+    foreign key (schedule_id) references schedule(id),
+    foreign key (price_id) references prices(id)
+);
+</code></pre>
+<p>Код заполнения:</p>
+<pre><code>insert into doctors (name, birth, class, price_id, schedule_id) values ('d1', now(), 'class1', 1, 1);
+insert into doctors (name, birth, class, price_id, schedule_id) values ('d2', now(), 'class1', 1, 2);
+insert into doctors (name, birth, class, price_id, schedule_id) values ('d2', now(), 'class3', 2, 3);
+</code></pre>
+<p><br></p>
+<h2 id="prices">Prices</h2>
+<table>
+<thead>
+<tr>
+<th>ПОЛЕ</th>
+<th>ТИП</th>
+<th>ПЕРВИЧНЫЙ КЛЮЧ</th>
+<th>ВНЕШНИЙ КЛЮЧ</th>
+<th>УНИКАЛЬНОСТЬ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>integer</td>
+<td>+</td>
+<td>-</td>
+<td>+</td>
+</tr>
+<tr>
+<td>price</td>
+<td>money</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>service</td>
+<td>varchar(64)</td>
+<td>-</td>
+<td>-</td>
+<td>+</td>
+</tr>
+</tbody>
+</table>
+<p>Код создания:</p>
+<pre><code>create table prices (
+    id serial primary key,
+    service varchar(64) not null,
+    price money not null
+);
+</code></pre>
+<p>Код заполнения:</p>
+<pre><code>insert into prices (service, price) values ('s1', 1000.00);
+insert into prices (service, price) values ('s2', 2000.00);
+insert into prices (service, price) values ('s3', 3500.00);
+</code></pre>
+<p><br></p>
+<h2 id="schedule">Schedule</h2>
+<table>
+<thead>
+<tr>
+<th>ПОЛЕ</th>
+<th>ТИП</th>
+<th>ПЕРВИЧНЫЙ КЛЮЧ</th>
+<th>ВНЕШНИЙ КЛЮЧ</th>
+<th>УНИКАЛЬНОСТЬ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>integer</td>
+<td>+</td>
+<td>-</td>
+<td>+</td>
+</tr>
+<tr>
+<td>working_days</td>
+<td>text[]</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<p>Код создания:</p>
+<pre><code>create table schedule (
+    id serial primary key,
+    working_days text[] not null
+);
+</code></pre>
+<p>Код заполнения:</p>
+<pre><code>insert into schedule (working_days) values ('{mo, tu}');
+insert into schedule (working_days) values ('{tu, we}');
+insert into schedule (working_days) values ('{we, th}');
+</code></pre>
+<p><br></p>
+<h2 id="hospitals">Hospitals</h2>
+<table>
+<thead>
+<tr>
+<th>ПОЛЕ</th>
+<th>ТИП</th>
+<th>ПЕРВИЧНЫЙ КЛЮЧ</th>
+<th>ВНЕШНИЙ КЛЮЧ</th>
+<th>УНИКАЛЬНОСТЬ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>integer</td>
+<td>+</td>
+<td>-</td>
+<td>+</td>
+</tr>
+<tr>
+<td>work_begin</td>
+<td>time</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>work_end</td>
+<td>time</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>phone</td>
+<td>varchar(64)</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<p>Код создания:</p>
+<pre><code>create table hospitals (
+    id serial primary key,
+    work_begin time not null,
+    work_end time not null,
+    phone varchar(64) not null
+);
+</code></pre>
+<p>Код заполнения:</p>
+<pre><code>insert into hospitals (work_begin, work_end, phone) values ('12:00:00', '20:00:00', '+79112811575');
+insert into hospitals (work_begin, work_end, phone) values ('13:00:00', '19:00:00', '+79112811575');
+insert into hospitals (work_begin, work_end, phone) values ('09:00:00', '18:00:00', '+79112811575');
+</code></pre>
+<p><br></p>
+<h2 id="visists">Visists</h2>
+<table>
+<thead>
+<tr>
+<th>ПОЛЕ</th>
+<th>ТИП</th>
+<th>ПЕРВИЧНЫЙ КЛЮЧ</th>
+<th>ВНЕШНИЙ КЛЮЧ</th>
+<th>УНИКАЛЬНОСТЬ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>integer</td>
+<td>+</td>
+<td>-</td>
+<td>+</td>
+</tr>
+<tr>
+<td>doctor_id</td>
+<td>integer</td>
+<td>-</td>
+<td>+</td>
+<td>-</td>
+</tr>
+<tr>
+<td>hospital_id</td>
+<td>integer</td>
+<td>-</td>
+<td>+</td>
+<td>-</td>
+</tr>
+<tr>
+<td>patient_id</td>
+<td>integer</td>
+<td>-</td>
+<td>+</td>
+<td>-</td>
+</tr>
+<tr>
+<td>was_at</td>
+<td>timestamp</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>price</td>
+<td>money</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<p>Код создания:</p>
+<pre><code>create tables visits (
+    id serial primary key,
+    was_at timestamp not null,
+    price money not null,
+    doctor_id integer not null,
+    hospital_id integer not null,
+    patient_id integer not null,
+    foreign key (doctor_id) references doctors(id),
+    foreign key (hospital_id) references hospitals(id),
+    foreign key (patient_id) references patients(id)
+);
+</code></pre>
+<p>Код заполнения:</p>
+<pre><code>insert into visits (was_at, price, patient_id, hospital_id, doctor_id) values (now(), 2000.00, 1, 1, 1);
+insert into visits (was_at, price, patient_id, hospital_id, doctor_id) values (now(), 4000.00, 2, 1, 2);
+insert into visits (was_at, price, patient_id, hospital_id, doctor_id) values (now(), 2400.00, 3, 2, 1);
+</code></pre>
+<p><br></p>
+<h2 id="records">Records</h2>
+<table>
+<thead>
+<tr>
+<th>ПОЛЕ</th>
+<th>ТИП</th>
+<th>ПЕРВИЧНЫЙ КЛЮЧ</th>
+<th>ВНЕШНИЙ КЛЮЧ</th>
+<th>УНИКАЛЬНОСТЬ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>integer</td>
+<td>+</td>
+<td>-</td>
+<td>+</td>
+</tr>
+<tr>
+<td>visit_id</td>
+<td>integer</td>
+<td>-</td>
+<td>+</td>
+<td>-</td>
+</tr>
+<tr>
+<td>info</td>
+<td>varchar(64)</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>result</td>
+<td>text</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>recomendation</td>
+<td>text</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<p>Код создания:</p>
+<pre><code>create table records ( 
+    id serial primary key,
+    info varchar(64) not null,
+    result text not null,
+    recomendation text,
+    visit_id integer not null,
+    foreign key(visit_id) references visits(id)
+);
+</code></pre>
+<p>Код заполнения:</p>
+<pre><code>insert into records (info, result, recomendation, visit_id) values ('info1', 'res1', 'rec1', 1);
+insert into records (info, result, recomendation, visit_id) values ('info2', 'res2', 'rec2', 1);
+insert into records (info, result, recomendation, visit_id) values ('info3', 'res3', 'rec3', 2);
+</code></pre></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js" defer></script>
+        <script src="../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
