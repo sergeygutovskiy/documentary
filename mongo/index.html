@@ -141,7 +141,51 @@
 </code></pre>
 <p><br></p>
 <h2 id="_3">Запросы</h2>
-<pre><code>
+<pre><code>db.doctors.aggregate({ $project :  { info : { $concat : [ &quot;$name&quot;, &quot;-&quot;, &quot;$class&quot; ] } } }).pretty()
+{ &quot;_id&quot; : ObjectId(&quot;60d25697ea1bd1c6bc8918e5&quot;), &quot;info&quot; : &quot;d1-class1&quot; }
+{ &quot;_id&quot; : ObjectId(&quot;60d25699ea1bd1c6bc8918e6&quot;), &quot;info&quot; : &quot;d2-class1&quot; }
+{ &quot;_id&quot; : ObjectId(&quot;60d2569aea1bd1c6bc8918e7&quot;), &quot;info&quot; : &quot;d3-class2&quot; }
+</code></pre>
+<p><br></p>
+<pre><code>doctor = db.doctors.findOne()
+{
+        &quot;_id&quot; : ObjectId(&quot;60d25697ea1bd1c6bc8918e5&quot;),
+        &quot;name&quot; : &quot;d1&quot;,
+        &quot;birth&quot; : ISODate(&quot;2021-06-22T21:29:23.272Z&quot;),
+        &quot;class&quot; : &quot;class1&quot;
+}
+
+db.visits.find({ &quot;doctor.$id&quot;: doctor._id }).pretty()
+{
+        &quot;_id&quot; : ObjectId(&quot;60d25a2aea1bd1c6bc8918e8&quot;),
+        &quot;doctor&quot; : DBRef(&quot;doctors&quot;, ObjectId(&quot;60d25697ea1bd1c6bc8918e5&quot;)),
+        &quot;patient&quot; : DBRef(&quot;patients&quot;, ObjectId(&quot;60d25688ea1bd1c6bc8918e2&quot;)),
+        &quot;was_at&quot; : ISODate(&quot;2021-06-22T21:42:40.269Z&quot;)
+}
+</code></pre>
+<p><br></p>
+<pre><code>visit = db.visits.findOne()
+{
+        &quot;_id&quot; : ObjectId(&quot;60d25a2aea1bd1c6bc8918e8&quot;),
+        &quot;doctor&quot; : DBRef(&quot;doctors&quot;, ObjectId(&quot;60d25697ea1bd1c6bc8918e5&quot;)),
+        &quot;patient&quot; : DBRef(&quot;patients&quot;, ObjectId(&quot;60d25688ea1bd1c6bc8918e2&quot;)),
+        &quot;was_at&quot; : ISODate(&quot;2021-06-22T21:42:40.269Z&quot;)
+}
+
+db.records.find({ &quot;visit.$id&quot;: visit._id }).pretty()
+{
+        &quot;_id&quot; : ObjectId(&quot;60d25a88ea1bd1c6bc8918ed&quot;),
+        &quot;visit&quot; : DBRef(&quot;visits&quot;, ObjectId(&quot;60d25a2aea1bd1c6bc8918e8&quot;)),
+        &quot;info&quot; : &quot;info2&quot;
+}
+</code></pre>
+<p><br></p>
+<pre><code>db.records.find({}, { id: true, info: true }).pretty()
+
+{ &quot;_id&quot; : ObjectId(&quot;60d25a53ea1bd1c6bc8918ec&quot;), &quot;info&quot; : &quot;info1&quot; }
+{ &quot;_id&quot; : ObjectId(&quot;60d25a88ea1bd1c6bc8918ed&quot;), &quot;info&quot; : &quot;info2&quot; }
+{ &quot;_id&quot; : ObjectId(&quot;60d25a89ea1bd1c6bc8918ee&quot;), &quot;info&quot; : &quot;info1&quot; }
+{ &quot;_id&quot; : ObjectId(&quot;60d25a8aea1bd1c6bc8918ef&quot;), &quot;info&quot; : &quot;info2&quot; }
 </code></pre></div>
             </div>
         </div>
